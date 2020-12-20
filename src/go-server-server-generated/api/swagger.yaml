@@ -1,203 +1,80 @@
 openapi: 3.0.0
 info:
-  title: GoWeb
-  contact:
-    email: xxx@mail2.sysu.edu.cn
-  version: 1.0.0
+  title: Swagger Petstore
+  contact: {}
+  version: 0.0.2
 servers:
 - url: /
 tags:
-- name: post
-  description: send post
 - name: user
-  description: Operations about user
-  externalDocs:
-    description: Find out more about our store
-    url: http://localhost
+  description: 用户操作
+- name: artical
+  description: 文章操作
 paths:
   /user:
-    post:
-      tags:
-      - user
-      summary: Create user
-      description: This can only be done by the logged in user.
-      operationId: createUser
-      parameters: []
-      requestBody:
-        description: Created user object
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      responses:
-        default:
-          description: successful operation
-  /user/login:
     get:
       tags:
       - user
-      summary: Logs user into the system
-      operationId: loginUser
-      parameters:
-      - name: username
-        in: query
-        description: The user name for login
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: password
-        in: query
-        description: The password for login in clear text
-        required: true
-        style: form
-        explode: true
-        schema:
-          type: string
-          format: password
-      responses:
-        "200":
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              style: simple
-              explode: false
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              style: simple
-              explode: false
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/xml:
-              schema:
-                type: string
-                x-content-type: application/xml
-            application/json:
-              schema:
-                type: string
-        "400":
-          description: Invalid username/password supplied
-          content:
-            application/json:
-              schema:
-                x-content-type: application/json
-  /user/logout:
-    get:
-      tags:
-      - user
-      summary: Logs out current logged in user session
-      operationId: logoutUser
-      parameters: []
-      responses:
-        default:
-          description: successful operation
-  /user/{username}:
-    get:
-      tags:
-      - user
-      summary: Get user by user name
-      operationId: getUserByName
-      parameters:
-      - name: username
-        in: path
-        description: 'The name that needs to be fetched. Use user1 for testing. '
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        "400":
-          description: Invalid username supplied
-        "404":
-          description: User not found
-    put:
-      tags:
-      - user
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-      - name: username
-        in: path
-        description: name that need to be updated
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "400":
-          description: Invalid user supplied
-        "404":
-          description: User not found
-    delete:
-      tags:
-      - user
-      summary: Delete user
-      description: This can only be done by the logged in user.
-      operationId: deleteUser
-      parameters:
-      - name: username
-        in: path
-        description: The name that needs to be deleted
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "400":
-          description: Invalid username supplied
-        "404":
-          description: User not found
-  /post:
-    get:
-      tags:
-      - post
-      summary: get all posts
-      operationId: getPost
+      operationId: getUser
       parameters: []
       responses:
         default:
           description: Default response
-    put:
+  /user/Logout:
+    get:
       tags:
-      - post
-      summary: update posts
-      operationId: updatePost
+      - user
+      operationId: userLogout
+      parameters: []
+      responses:
+        default:
+          description: Default response
+  /atricle:
+    get:
+      tags:
+      - artical
+      operationId: getArtical
       parameters: []
       responses:
         default:
           description: Default response
     post:
       tags:
-      - post
-      summary: send post
-      operationId: sendPost
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema: {}
+      - artical
+      operationId: sendArtical
+      parameters:
+      - name: text
+        in: query
+        description: 文本信息
         required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: figure
+        in: query
+        description: 图片信息
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: ID
+        in: query
+        description: 发送方用户ID
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: time
+        in: query
+        description: 发送文章的时间
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
       responses:
         default:
           description: Default response
@@ -205,7 +82,32 @@ paths:
       summary: ""
       description: ""
       parameters: []
-      operationId: ""
+      operationId: getArtical
+      responses:
+        default:
+          description: Default response
+  /user/Login:
+    post:
+      tags:
+      - user
+      operationId: userLogin
+      parameters:
+      - name: ID
+        in: query
+        description: 用户ID
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: 用户密码
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
       responses:
         default:
           description: Default response
@@ -214,68 +116,9 @@ components:
     User:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-        username:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
+        ID:
           type: string
         password:
           type: string
-        phone:
-          type: string
-        userStatus:
-          type: integer
-          description: User Status
-          format: int32
-      example:
-        firstName: firstName
-        lastName: lastName
-        password: password
-        userStatus: 6
-        phone: phone
-        id: 0
-        email: email
-        username: username
-      xml:
-        name: User
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: Tag
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-    Post:
-      type: object
-  requestBodies:
-    UserArray:
-      description: List of user object
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
-      required: true
-  securitySchemes: {}
   links: {}
   callbacks: {}

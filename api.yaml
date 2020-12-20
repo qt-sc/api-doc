@@ -1,274 +1,137 @@
 openapi: 3.0.0
-servers: []
 info:
-  description: ''
-  version: 1.0.0
-  title: GoWeb
-  termsOfService: ''
-  contact:
-    email: 'xxx@mail2.sysu.edu.cn'
-tags:
-  - name: post
-    description: send post
-  - name: user
-    description: Operations about user
-    externalDocs:
-      description: Find out more about our store
-      url: 'http://localhost'
+  title: Swagger Petstore
+  version: 0.0.2
+  contact: {}
 paths:
   /user:
+    get:
+      summary: ''
+      description: ''
+      parameters: []
+      operationId: getUser
+      responses:
+        default:
+          description: Default response
+      tags:
+        - user
+  /user/Logout:
+    get:
+      summary: ''
+      description: ''
+      parameters: []
+      operationId: userLogout
+      responses:
+        default:
+          description: Default response
+      tags:
+        - user
+  /atricle:
     post:
-      tags:
-        - user
-      summary: Create user
-      description: This can only be done by the logged in user.
-      operationId: createUser
+      summary: ''
+      description: ''
+      parameters:
+        - name: text
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 文本信息
+        - name: figure
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 图片信息
+        - name: ID
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 发送方用户ID
+        - name: time
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 发送文章的时间
+          # format: date-time
+      operationId: sendArtical
       responses:
         default:
-          description: successful operation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-        description: Created user object
-        required: true
-      parameters: []
-  /user/login:
-    get:
+          description: Default response
       tags:
-        - user
-      summary: Logs user into the system
-      description: ''
-      operationId: loginUser
-      parameters:
-        - name: username
-          in: query
-          description: The user name for login
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: The password for login in clear text
-          required: true
-          schema:
-            type: string
-            format: password
-      responses:
-        '200':
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/xml:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-        '400':
-          description: Invalid username/password supplied
-          content:
-            application/json:
-              schema: {}
-  /user/logout:
-    get:
-      tags:
-        - user
-      summary: Logs out current logged in user session
-      description: ''
-      operationId: logoutUser
-      responses:
-        default:
-          description: successful operation
-      parameters: []
-  '/user/{username}':
-    get:
-      tags:
-        - user
-      summary: Get user by user name
-      description: ''
-      operationId: getUserByName
-      parameters:
-        - name: username
-          in: path
-          description: 'The name that needs to be fetched. Use user1 for testing. '
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          description: Invalid username supplied
-        '404':
-          description: User not found
-    put:
-      tags:
-        - user
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-        - name: username
-          in: path
-          description: name that need to be updated
-          required: true
-          schema:
-            type: string
-      responses:
-        '400':
-          description: Invalid user supplied
-        '404':
-          description: User not found
-    delete:
-      tags:
-        - user
-      summary: Delete user
-      description: This can only be done by the logged in user.
-      operationId: deleteUser
-      parameters:
-        - name: username
-          in: path
-          description: The name that needs to be deleted
-          required: true
-          schema:
-            type: string
-      responses:
-        '400':
-          description: Invalid username supplied
-        '404':
-          description: User not found
-  /post:
+        - artical
     x-temp:
       summary: ''
       description: ''
       parameters: []
-      operationId: ''
+      operationId: getArtical
       responses:
         default:
           description: Default response
     get:
-      summary: get all posts
+      summary: ''
       description: ''
       parameters: []
-      operationId: getPost
+      operationId: getArtical
       responses:
         default:
           description: Default response
       tags:
-        - post
+        - artical
+  /user/Login:
     post:
-      summary: send post
+      summary: ''
       description: ''
-      parameters: []
-      operationId: sendPost
+      parameters:
+        - name: ID
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 用户ID
+        - name: password
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 用户密码
+          # format: password
+      operationId: userLogin
       responses:
         default:
           description: Default response
       tags:
-        - post
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema: {}
-    put:
-      summary: update posts
-      description: ''
-      parameters: []
-      operationId: updatePost
-      responses:
-        default:
-          description: Default response
-      tags:
-        - post
+        - user
+security: []
+servers: []
 components:
+  links: {}
+  callbacks: {}
   schemas:
     User:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-        username:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
+        ID:
           type: string
         password:
           type: string
-        phone:
-          type: string
-        userStatus:
-          type: integer
-          format: int32
-          description: User Status
-      xml:
-        name: User
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-      xml:
-        name: Tag
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-    Post:
-      type: object
-  requestBodies:
-    # Pet:
-    #   content:
-    #     application/json:
-    #       schema:
-    #         $ref: '#/components/schemas/Pet'
-    #     application/xml:
-    #       schema:
-    #         $ref: '#/components/schemas/Pet'
-    #   description: Pet object that needs to be added to the store
-    #   required: true
-    UserArray:
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
-      description: List of user object
-      required: true
-  securitySchemes: {}
-  links: {}
-  callbacks: {}
-security: []
+    #     article:
+    #       articleID: []
+    #     comment:
+    #       commentID: []
+    #     like:
+    #       articleID: []
+    # Article:
+    #   type: object
+    #   articleID:
+    #     ID: []
+    #     text: string
+    #   userID:
+    #     ID: []
+tags:
+  - name: user
+    description: 用户操作
+  - name: artical
+    description: 文章操作
