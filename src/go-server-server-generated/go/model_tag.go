@@ -8,13 +8,7 @@
  */
 package swagger
 
-type User struct {
+type Tag struct {
 
-	Id int64 `json:"id,omitempty"`
-
-	Password string `json:"password,omitempty"`
-
-	Articles []Article `json:"articles,omitempty"`
-
-	Email string `json:"email,omitempty"`
+	Name string `json:"name,omitempty"`
 }

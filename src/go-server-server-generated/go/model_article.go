@@ -8,13 +8,15 @@
  */
 package swagger
 
-type User struct {
+type Article struct {
 
-	Id int64 `json:"id,omitempty"`
+	ReadNum int32 `json:"readNum,omitempty"`
 
-	Password string `json:"password,omitempty"`
+	LikeNum int32 `json:"likeNum,omitempty"`
 
-	Articles []Article `json:"articles,omitempty"`
+	Content string `json:"content,omitempty"`
 
-	Email string `json:"email,omitempty"`
+	Replies []Reply `json:"replies,omitempty"`
+
+	Tags []Tag `json:"tags,omitempty"`
 }

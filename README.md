@@ -6,4 +6,6 @@
 
 目前存在的 issue：帖子对应的 api 名可能需要进行修改。
 
-稍后或许会补充领域模型。~~如果有时间的话~~
+资源表示模型：
+
+![rrm](image/resource-representation-model.png)

@@ -1,15 +1,22 @@
 openapi: 3.0.0
 info:
-  title: Swagger Petstore
+  title: zhihu_caffe
   contact: {}
   version: 0.0.2
 servers:
 - url: /
 tags:
 - name: user
-  description: 用户操作
+  description: |
+    In the app, user can post articles or reply an article.
 - name: artical
-  description: 文章操作
+  description: An article can present infomation to other users, and users can interact
+    with other users through this article.
+- name: tag
+  description: Tag is used to describe an article, and also be used to search articles.
+- name: replay
+  description: Replay can be posted by a user after reading an article. Other users
+    can also interact with replay.
 paths:
   /user:
     get:
@@ -116,9 +123,63 @@ components:
     User:
       type: object
       properties:
-        ID:
-          type: string
+        id:
+          type: integer
+          format: int64
         password:
+          type: string
+          format: password
+        articles:
+          type: array
+          xml:
+            name: Article
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Article'
+        email:
+          type: string
+    Article:
+      type: object
+      properties:
+        readNum:
+          type: integer
+          format: int32
+        likeNum:
+          type: integer
+          format: int32
+        content:
+          type: string
+        replies:
+          type: array
+          xml:
+            name: Reply
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Reply'
+        tags:
+          type: array
+          xml:
+            name: Tag
+            wrapped: true
+          items:
+            $ref: '#/components/schemas/Tag'
+    Reply:
+      type: object
+      properties:
+        likeNum:
+          type: integer
+          format: int32
+        createTime:
+          type: string
+          format: date-time
+        content:
+          type: string
+        author-url:
+          type: string
+    Tag:
+      type: object
+      properties:
+        name:
           type: string
   links: {}
   callbacks: {}
