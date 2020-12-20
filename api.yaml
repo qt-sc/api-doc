@@ -4,12 +4,17 @@ info:
   version: 0.0.3
   contact: {}
 paths:
-  /users:
+  /users/signup:
     get:
       summary: ''
       description: ''
-      parameters: []
-      operationId: getUsers
+      parameters:
+        - name: newUser
+          in: header
+          required: true
+          schema:
+            type: string
+      operationId: userSignup
       responses:
         default:
           description: Default response
@@ -21,7 +26,7 @@ paths:
       description: ''
       parameters:
         - name: token
-          in: query
+          in: cookie
           required: false
           schema:
             type: string
@@ -37,14 +42,14 @@ paths:
       description: ''
       parameters:
         - name: id
-          in: query
-          required: false
+          in: header
+          required: true
           schema:
             type: string
           description: ''
         - name: password
-          in: query
-          required: false
+          in: header
+          required: true
           schema:
             type: string
           description: ''
@@ -54,83 +59,109 @@ paths:
           description: Default response
       tags:
         - user
-  '/users/{user}':
+  '/users/{userid}':
     get:
-      summary: ''
+      summary: get user profile by userid
       description: ''
       parameters:
-        - name: user
+        - name: userid
           in: path
           required: true
           schema:
             type: string
-      operationId: ''
-      responses:
-        default:
-          description: Default response
-  '/users/{user}/articles':
-    post:
-      summary: ''
-      description: ''
-      parameters:
-        - name: user
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: text
-          in: query
-          required: false
-          schema:
-            type: string
-          description: 文本信息
-        - name: figure
-          in: query
-          required: false
-          schema:
-            type: string
-          description: 图片信息
-        - name: ID
-          in: query
-          required: false
-          schema:
-            type: string
-          description: 发送方用户ID
-        - name: time
-          in: query
-          required: false
-          schema:
-            type: string
-          description: 发送文章的时间
-      operationId: sendArtical
+      operationId: getUserProfile
       responses:
         default:
           description: Default response
       tags:
-        - artical
-    x-temp:
-      summary: ''
+        - user
+    put:
+      summary: update an existed user info by userid
       description: ''
+      parameters:
+        - name: userInfo
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: string
+      operationId: updateUser
+      responses:
+        default:
+          description: Default response
+      tags:
+        - user
+    delete:
+      summary: delete an existed user by userid
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: deleteUser
+      responses:
+        default:
+          description: Default response
+      tags:
+        - user
+  /api/users:
+    get:
+      summary: get user list
+      description: Returns a list containing all users.
       parameters: []
-      operationId: getArtical
+      operationId: getUsers
       responses:
-        default:
+        '200':
           description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - user
+  '/api/users/{userid}':
     get:
       summary: ''
       description: ''
       parameters:
-        - name: user
+        - name: userid
           in: path
           required: true
           schema:
             type: string
-      operationId: getArtical
+      operationId: getUserInfo
       responses:
-        default:
+        '200':
           description: Default response
+          content:
+            application/json:
+              schema: {}
       tags:
-        - artical
+        - user
+  '/api/users/{userid}/articles':
+    get:
+      summary: get articles list written by a user with specified user id
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: string
+      operationId: getArticles
+      responses:
+        '200':
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - article
 components:
   schemas:
     User:
@@ -206,7 +237,7 @@ tags:
   - name: user
     description: |
       In the app, user can post articles or reply an article.
-  - name: artical
+  - name: article
     description: >-
       An article can present infomation to other users, and users can interact
       with other users through this article.

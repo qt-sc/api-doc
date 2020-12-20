@@ -55,31 +55,45 @@ var routes = Routes{
 	},
 
 	Route{
-		"GetArtical",
+		"GetArticles",
 		strings.ToUpper("Get"),
-		"/users/{user}/articles",
-		GetArtical,
+		"/api/users/{userid}/articles",
+		GetArticles,
 	},
 
 	Route{
-		"SendArtical",
-		strings.ToUpper("Post"),
-		"/users/{user}/articles",
-		SendArtical,
+		"DeleteUser",
+		strings.ToUpper("Delete"),
+		"/users/{userid}",
+		DeleteUser,
 	},
 
 	Route{
-		"UsersUserGet",
+		"GetUserInfo",
 		strings.ToUpper("Get"),
-		"/users/{user}",
-		UsersUserGet,
+		"/api/users/{userid}",
+		GetUserInfo,
+	},
+
+	Route{
+		"GetUserProfile",
+		strings.ToUpper("Get"),
+		"/users/{userid}",
+		GetUserProfile,
 	},
 
 	Route{
 		"GetUsers",
 		strings.ToUpper("Get"),
-		"/users",
+		"/api/users",
 		GetUsers,
+	},
+
+	Route{
+		"UpdateUser",
+		strings.ToUpper("Put"),
+		"/users/{userid}",
+		UpdateUser,
 	},
 
 	Route{
@@ -94,5 +108,12 @@ var routes = Routes{
 		strings.ToUpper("Get"),
 		"/users/logout",
 		UserLogout,
+	},
+
+	Route{
+		"UserSignup",
+		strings.ToUpper("Get"),
+		"/users/signup",
+		UserSignup,
 	},
 }

@@ -9,7 +9,7 @@ tags:
 - name: user
   description: |
     In the app, user can post articles or reply an article.
-- name: artical
+- name: article
   description: An article can present infomation to other users, and users can interact
     with other users through this article.
 - name: tag
@@ -18,12 +18,19 @@ tags:
   description: Replay can be posted by a user after reading an article. Other users
     can also interact with replay.
 paths:
-  /users:
+  /users/signup:
     get:
       tags:
       - user
-      operationId: getUsers
-      parameters: []
+      operationId: userSignup
+      parameters:
+      - name: newUser
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
         default:
           description: Default response
@@ -34,7 +41,7 @@ paths:
       operationId: userLogout
       parameters:
       - name: token
-        in: query
+        in: cookie
         required: false
         style: form
         explode: true
@@ -50,27 +57,14 @@ paths:
       operationId: userLogin
       parameters:
       - name: id
-        in: query
-        required: false
-        style: form
-        explode: true
+        in: header
+        required: true
+        style: simple
+        explode: false
         schema:
           type: string
       - name: password
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: Default response
-  /users/{user}:
-    get:
-      parameters:
-      - name: user
-        in: path
+        in: header
         required: true
         style: simple
         explode: false
@@ -79,13 +73,14 @@ paths:
       responses:
         default:
           description: Default response
-  /users/{user}/articles:
+  /users/{userid}:
     get:
       tags:
-      - artical
-      operationId: getArtical
+      - user
+      summary: get user profile by userid
+      operationId: getUserProfile
       parameters:
-      - name: user
+      - name: userid
         in: path
         required: true
         style: simple
@@ -95,61 +90,101 @@ paths:
       responses:
         default:
           description: Default response
-    post:
+    put:
       tags:
-      - artical
-      operationId: sendArtical
+      - user
+      summary: update an existed user info by userid
+      operationId: updateUser
       parameters:
-      - name: user
+      - name: userInfo
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: userid
         in: path
         required: true
         style: simple
         explode: false
         schema:
           type: string
-      - name: text
-        in: query
-        description: 文本信息
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: figure
-        in: query
-        description: 图片信息
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: ID
-        in: query
-        description: 发送方用户ID
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: time
-        in: query
-        description: 发送文章的时间
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
       responses:
         default:
           description: Default response
-    x-temp:
-      summary: ""
-      description: ""
+    delete:
+      tags:
+      - user
+      summary: delete an existed user by userid
+      operationId: deleteUser
+      parameters:
+      - name: userid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        default:
+          description: Default response
+  /api/users:
+    get:
+      tags:
+      - user
+      summary: get user list
+      description: Returns a list containing all users.
+      operationId: getUsers
       parameters: []
-      operationId: getArtical
       responses:
-        default:
+        "200":
           description: Default response
+          content:
+            application/json:
+              schema:
+                x-content-type: application/json
+  /api/users/{userid}:
+    get:
+      tags:
+      - user
+      operationId: getUserInfo
+      parameters:
+      - name: userid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Default response
+          content:
+            application/json:
+              schema:
+                x-content-type: application/json
+  /api/users/{userid}/articles:
+    get:
+      tags:
+      - article
+      summary: get articles list written by a user with specified user id
+      operationId: getArticles
+      parameters:
+      - name: userid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Default response
+          content:
+            application/json:
+              schema:
+                x-content-type: application/json
 components:
   schemas:
     User:
