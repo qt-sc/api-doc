@@ -1,36 +1,83 @@
 openapi: 3.0.0
 info:
   title: zhihu_caffe
-  version: 0.0.2
+  version: 0.0.3
   contact: {}
 paths:
-  /user:
+  /users:
     get:
       summary: ''
       description: ''
       parameters: []
-      operationId: getUser
+      operationId: getUsers
       responses:
         default:
           description: Default response
       tags:
         - user
-  /user/Logout:
+  /users/logout:
     get:
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: token
+          in: query
+          required: false
+          schema:
+            type: string
       operationId: userLogout
       responses:
         default:
           description: Default response
       tags:
         - user
-  /atricle:
+  /users/login:
     post:
       summary: ''
       description: ''
       parameters:
+        - name: id
+          in: query
+          required: false
+          schema:
+            type: string
+          description: ''
+        - name: password
+          in: query
+          required: false
+          schema:
+            type: string
+          description: ''
+      operationId: userLogin
+      responses:
+        default:
+          description: Default response
+      tags:
+        - user
+  '/users/{user}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+      operationId: ''
+      responses:
+        default:
+          description: Default response
+  '/users/{user}/articles':
+    post:
+      summary: ''
+      description: ''
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
         - name: text
           in: query
           required: false
@@ -72,36 +119,18 @@ paths:
     get:
       summary: ''
       description: ''
-      parameters: []
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
       operationId: getArtical
       responses:
         default:
           description: Default response
       tags:
         - artical
-  /user/Login:
-    post:
-      summary: ''
-      description: ''
-      parameters:
-        - name: ID
-          in: query
-          required: false
-          schema:
-            type: string
-          description: 用户ID
-        - name: password
-          in: query
-          required: false
-          schema:
-            type: string
-          description: 用户密码
-      operationId: userLogin
-      responses:
-        default:
-          description: Default response
-      tags:
-        - user
 components:
   schemas:
     User:
@@ -132,10 +161,10 @@ components:
           type: string
         readNum:
           type: integer
-          format: int32
+          format: int64
         likeNum:
           type: integer
-          format: int32
+          format: int64
         content:
           type: string
         replies:
@@ -143,16 +172,16 @@ components:
           xml:
             name: Reply
             wrapped: true
-          items: 
+          items:
             $ref: '#/components/schemas/Reply'
         tags:
           type: array
           xml:
             name: Tag
             wrapped: true
-          items: 
+          items:
             $ref: '#/components/schemas/Tag'
-    Reply: 
+    Reply:
       type: object
       properties:
         id:
@@ -160,7 +189,7 @@ components:
           format: int64
         likeNum:
           type: integer
-          format: int32
+          format: int64
         createTime:
           type: string
           format: date-time
@@ -168,7 +197,7 @@ components:
           type: string
         author-url:
           type: string
-    Tag: 
+    Tag:
       type: object
       properties:
         name:

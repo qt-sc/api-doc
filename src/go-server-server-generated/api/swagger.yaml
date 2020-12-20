@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: zhihu_caffe
   contact: {}
-  version: 0.0.2
+  version: 0.0.3
 servers:
 - url: /
 tags:
@@ -18,30 +18,80 @@ tags:
   description: Replay can be posted by a user after reading an article. Other users
     can also interact with replay.
 paths:
-  /user:
+  /users:
     get:
       tags:
       - user
-      operationId: getUser
+      operationId: getUsers
       parameters: []
       responses:
         default:
           description: Default response
-  /user/Logout:
+  /users/logout:
     get:
       tags:
       - user
       operationId: userLogout
-      parameters: []
+      parameters:
+      - name: token
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
       responses:
         default:
           description: Default response
-  /atricle:
+  /users/login:
+    post:
+      tags:
+      - user
+      operationId: userLogin
+      parameters:
+      - name: id
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default response
+  /users/{user}:
+    get:
+      parameters:
+      - name: user
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default response
+  /users/{user}/articles:
     get:
       tags:
       - artical
       operationId: getArtical
-      parameters: []
+      parameters:
+      - name: user
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
         default:
           description: Default response
@@ -50,6 +100,13 @@ paths:
       - artical
       operationId: sendArtical
       parameters:
+      - name: user
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: text
         in: query
         description: 文本信息
@@ -93,31 +150,6 @@ paths:
       responses:
         default:
           description: Default response
-  /user/Login:
-    post:
-      tags:
-      - user
-      operationId: userLogin
-      parameters:
-      - name: ID
-        in: query
-        description: 用户ID
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: password
-        in: query
-        description: 用户密码
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: Default response
 components:
   schemas:
     User:
@@ -148,10 +180,10 @@ components:
           type: string
         readNum:
           type: integer
-          format: int32
+          format: int64
         likeNum:
           type: integer
-          format: int32
+          format: int64
         content:
           type: string
         replies:
@@ -176,7 +208,7 @@ components:
           format: int64
         likeNum:
           type: integer
-          format: int32
+          format: int64
         createTime:
           type: string
           format: date-time
