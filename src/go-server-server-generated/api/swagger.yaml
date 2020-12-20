@@ -141,6 +141,11 @@ components:
     Article:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
         readNum:
           type: integer
           format: int32
@@ -166,6 +171,9 @@ components:
     Reply:
       type: object
       properties:
+        id:
+          type: integer
+          format: int64
         likeNum:
           type: integer
           format: int32
@@ -181,5 +189,3 @@ components:
       properties:
         name:
           type: string
-  links: {}
-  callbacks: {}

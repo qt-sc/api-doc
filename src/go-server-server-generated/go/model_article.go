@@ -10,6 +10,10 @@ package swagger
 
 type Article struct {
 
+	Id int64 `json:"id,omitempty"`
+
+	Title string `json:"title,omitempty"`
+
 	ReadNum int32 `json:"readNum,omitempty"`
 
 	LikeNum int32 `json:"likeNum,omitempty"`
