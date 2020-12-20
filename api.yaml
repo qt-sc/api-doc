@@ -1,15 +1,25 @@
 openapi: 3.0.0
 info:
   title: zhihu_caffe
-  version: 0.0.3
+  version: 0.1.0
   contact: {}
 paths:
   /users/signup:
     get:
-      summary: ''
+      summary: 'return a page using to create new user'
+      description: ''
+      parameters: []
+      operationId: getSignupPage
+      responses:
+        default:
+          description: Default response
+      tags:
+        - user
+    post:
+      summary: 'create a user in sign up page'
       description: ''
       parameters:
-        - name: newUser
+        - name: userInfo
           in: header
           required: true
           schema:
@@ -68,8 +78,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-      operationId: getUserProfile
+            type: integer
+      operationId: getUserPage
       responses:
         default:
           description: Default response
@@ -88,7 +98,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            type: integer
       operationId: updateUser
       responses:
         default:
@@ -110,6 +120,212 @@ paths:
           description: Default response
       tags:
         - user
+  '/users/{userid}/articles':
+    get:
+      summary: get articles written by user with specified userid
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: getArticlesPage
+      responses:
+        default:
+          description: Default response
+      tags:
+        - article
+  '/users/{userid}/articles/new':
+    get:
+      summary: 'return a page using to create new article'
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: getCreateArticlePage
+      responses:
+        default:
+          description: Default response
+      tags:
+        - article
+    post:
+      summary: 'create an article by a user with specified userid'
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: article
+          in: header
+          required: true
+          schema:
+            type: string
+      operationId: createArticle
+      responses:
+        default:
+          description: Default response
+      tags:
+        - article
+  '/users/{userid}/articles/{articleid}':
+    get:
+      summary: get article by aritcle id and user id
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: getArticlePage
+      responses:
+        default:
+          description: Default response
+      tags:
+        - article
+    put:
+      summary: update an existed article info by userid and article id
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: updateArticle
+      responses:
+        default:
+          description: Default response
+      tags:
+        - article
+    delete:
+      summary: delete an article by userid and article id
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: deleteArticle
+      responses:
+        default:
+          description: Default response
+      tags:
+        - article
+  '/users/{userid}/articles/{articleid}/like':
+    put:
+      summary: 'like an article'
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: likeArticle
+      responses:
+        default:
+          description: Default response
+      tags:
+        - article
+  '/users/{userid}/articles/{articleid}/replies/new':
+    post:
+      summary: 'create an reply in a specified article'
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: reply
+          in: header
+          required: true
+          schema:
+            type: string
+      operationId: createReply
+      responses:
+        default:
+          description: Default response
+      tags:
+        - reply
+  '/users/{userid}/articles/{articleid}/replies/{replyid}/like':
+    put:
+      summary: 'like a reply in a specified article'
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: replyid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: likeReply
+      responses:
+        default:
+          description: Default response
+      tags:
+        - reply
+  '/tags/{tagname}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        - name: tagname
+          in: path
+          required: true
+          schema:
+            type: string
+      operationId: getArticlesPageByTag
+      responses:
+        '200':
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - tag
+  
   /api/users:
     get:
       summary: get user list
@@ -133,7 +349,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            type: integer
       operationId: getUserInfo
       responses:
         '200':
@@ -152,7 +368,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            type: integer
       operationId: getArticles
       responses:
         '200':
@@ -162,6 +378,117 @@ paths:
               schema: {}
       tags:
         - article
+  '/api/users/{userid}/articles/{articleid}':
+    get:
+      summary: get article by specified article id
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: getArticle
+      responses:
+        '200':
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - article
+  '/api/users/{userid}/articles/{articleid}/replies':
+    get:
+      summary: get replies list in a specified article
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: getReplies
+      responses:
+        '200':
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - reply
+  '/api/users/{userid}/articles/{articleid}/replies/{replyid}':
+    get:
+      summary: get a reply with reply id in a specified article
+      description: ''
+      parameters:
+        - name: userid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: articleid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: replyid
+          in: path
+          required: true
+          schema:
+            type: integer
+      operationId: getReply
+      responses:
+        '200':
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - reply
+  '/api/tags':
+    get:
+      summary: get tag list
+      description: Returns a list containing all tags.
+      parameters: []
+      operationId: getTags
+      responses:
+        '200':
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - tag
+  '/api/tags/{tagname}':
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        - name: tagname
+          in: path
+          required: true
+          schema:
+            type: string
+      operationId: searchArticlesByTag
+      responses:
+        '200':
+          description: Default response
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - tag
+
 components:
   schemas:
     User:
@@ -241,9 +568,9 @@ tags:
     description: >-
       An article can present infomation to other users, and users can interact
       with other users through this article.
-  - name: tag
-    description: 'Tag is used to describe an article, and also be used to search articles.'
-  - name: replay
+  - name: reply
     description: >-
       Replay can be posted by a user after reading an article. Other users can
       also interact with replay.
+  - name: tag
+    description: 'Tag is used to describe an article, and also be used to search articles.'
