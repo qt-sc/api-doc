@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: zhihu_caffe
   contact: {}
-  version: 0.1.0
+  version: 0.1.1
 servers:
 - url: /
 tags:
@@ -34,13 +34,13 @@ paths:
       summary: create a user in sign up page
       operationId: userSignup
       parameters:
-      - name: userInfo
+      - name: user
         in: header
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          $ref: '#/components/schemas/User'
       responses:
         default:
           description: Default response
@@ -66,13 +66,13 @@ paths:
       - user
       operationId: userLogin
       parameters:
-      - name: id
+      - name: userid
         in: header
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          type: integer
       - name: password
         in: header
         required: true
@@ -106,13 +106,13 @@ paths:
       summary: update an existed user info by userid
       operationId: updateUser
       parameters:
-      - name: userInfo
+      - name: user
         in: header
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          $ref: '#/components/schemas/User'
       - name: userid
         in: path
         required: true
@@ -192,7 +192,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
+          $ref: '#/components/schemas/Article'
       responses:
         default:
           description: Default response
@@ -317,7 +317,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
+          $ref: '#/components/schemas/Reply'
       responses:
         default:
           description: Default response
@@ -386,7 +386,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Users'
   /api/users/{userid}:
     get:
       tags:
@@ -406,7 +406,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Users'
   /api/users/{userid}/articles:
     get:
       tags:
@@ -427,7 +427,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Articles'
   /api/users/{userid}/articles/{articleid}:
     get:
       tags:
@@ -455,7 +455,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Article'
   /api/users/{userid}/articles/{articleid}/replies:
     get:
       tags:
@@ -483,7 +483,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Replies'
   /api/users/{userid}/articles/{articleid}/replies/{replyid}:
     get:
       tags:
@@ -518,7 +518,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Reply'
   /api/tags:
     get:
       tags:
@@ -533,7 +533,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Tags'
   /api/tags/{tagname}:
     get:
       tags:
@@ -553,7 +553,7 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Tag'
 components:
   schemas:
     User:
@@ -574,6 +574,49 @@ components:
             $ref: '#/components/schemas/Article'
         email:
           type: string
+      example:
+        password: ""
+        id: 0
+        articles:
+        - replies:
+          - createTime: 2000-01-23T04:56:07.000+00:00
+            id: 5
+            author-url: author-url
+            content: content
+            likeNum: 2
+          - createTime: 2000-01-23T04:56:07.000+00:00
+            id: 5
+            author-url: author-url
+            content: content
+            likeNum: 2
+          readNum: 1
+          id: 6
+          title: title
+          content: content
+          likeNum: 5
+          tags:
+          - name: name
+          - name: name
+        - replies:
+          - createTime: 2000-01-23T04:56:07.000+00:00
+            id: 5
+            author-url: author-url
+            content: content
+            likeNum: 2
+          - createTime: 2000-01-23T04:56:07.000+00:00
+            id: 5
+            author-url: author-url
+            content: content
+            likeNum: 2
+          readNum: 1
+          id: 6
+          title: title
+          content: content
+          likeNum: 5
+          tags:
+          - name: name
+          - name: name
+        email: email
     Article:
       type: object
       properties:
@@ -604,6 +647,26 @@ components:
             wrapped: true
           items:
             $ref: '#/components/schemas/Tag'
+      example:
+        replies:
+        - createTime: 2000-01-23T04:56:07.000+00:00
+          id: 5
+          author-url: author-url
+          content: content
+          likeNum: 2
+        - createTime: 2000-01-23T04:56:07.000+00:00
+          id: 5
+          author-url: author-url
+          content: content
+          likeNum: 2
+        readNum: 1
+        id: 6
+        title: title
+        content: content
+        likeNum: 5
+        tags:
+        - name: name
+        - name: name
     Reply:
       type: object
       properties:
@@ -620,8 +683,81 @@ components:
           type: string
         author-url:
           type: string
+      example:
+        createTime: 2000-01-23T04:56:07.000+00:00
+        id: 5
+        author-url: author-url
+        content: content
+        likeNum: 2
     Tag:
       type: object
       properties:
         name:
           type: string
+      example:
+        name: name
+    Users:
+      type: array
+      xml:
+        name: User
+        wrapped: true
+      items:
+        $ref: '#/components/schemas/User'
+      x-schema-name: Users
+    Articles:
+      type: array
+      xml:
+        name: Article
+        wrapped: true
+      items:
+        $ref: '#/components/schemas/Article'
+      x-schema-name: Articles
+    Replies:
+      type: array
+      xml:
+        name: Reply
+        wrapped: true
+      items:
+        $ref: '#/components/schemas/Reply'
+      x-schema-name: Replies
+    Tags:
+      type: array
+      xml:
+        name: Tag
+        wrapped: true
+      items:
+        $ref: '#/components/schemas/Tag'
+      x-schema-name: Tags
+  parameters:
+    userid:
+      name: userid
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+    articleid:
+      name: articleid
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+    replyid:
+      name: replyid
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: integer
+    tagname:
+      name: tagname
+      in: path
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
