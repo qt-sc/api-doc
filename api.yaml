@@ -1,7 +1,7 @@
   openapi: 3.0.0
   info:
     title: zhihu_caffe
-    version: 0.1.1
+    version: 0.1.2
     contact: {}
   paths:
     /users/signup:
@@ -247,9 +247,24 @@
         tags:
           - tag
 
+    /api:
+      get:
+        summary: get apis list
+        description: Returns a list containing all apis.
+        parameters: []
+        responses:
+          "200":
+            description: Default response
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Users"
+        tags:
+          - user
+
     /api/users:
       get:
-        summary: get user list
+        summary: get users list
         description: Returns a list containing all users.
         parameters: []
         operationId: getUsers
@@ -361,7 +376,7 @@
                   $ref: "#/components/schemas/Tags"
         tags:
           - tag
-    "/api/tags/{tagname}":
+    "/api/tags/{tagname}/articles":
       get:
         summary: ""
         description: ""
@@ -398,6 +413,8 @@
               $ref: "#/components/schemas/Article"
           email:
             type: string
+          url:
+            type: string
       Article:
         type: object
         properties:
@@ -428,6 +445,8 @@
               wrapped: true
             items:
               $ref: "#/components/schemas/Tag"
+          url:
+            type: string
       Reply:
         type: object
         properties:
@@ -443,6 +462,8 @@
           content:
             type: string
           author-url:
+            type: string
+          url:
             type: string
       Tag:
         type: object
@@ -477,6 +498,33 @@
           wrapped: true
         items:
           $ref: "#/components/schemas/Tag"
+      Apis:
+        type: object
+        properties:
+          users_url:
+            type: string
+            default: "/api/users"
+          user_url:
+            type: string
+            default: "/api/users/{userid}"
+          articles_url:
+            type: string
+            default: "/api/users/{userid}/articles"
+          article_url:
+            type: string
+            default: "/api/users/{userid}/articles/{articleid}"
+          replies_url:
+            type: string
+            default: "/api/users/{userid}/articles/{articleid}/replies"
+          reply_url:
+            type: string
+            default: "/api/users/{userid}/articles/{articleid}/replies/{replyid}"
+          tags_url:
+            type: string
+            default: "/api/users"
+          tag_url:
+            type: string
+            default: "/api/users/{userid}"
     parameters:
       userid:
         name: userid

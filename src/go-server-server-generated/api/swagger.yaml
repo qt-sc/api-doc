@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: zhihu_caffe
   contact: {}
-  version: 0.1.1
+  version: 0.1.2
 servers:
 - url: /
 tags:
@@ -372,11 +372,25 @@ paths:
             application/json:
               schema:
                 x-content-type: application/json
+  /api:
+    get:
+      tags:
+      - user
+      summary: get apis list
+      description: Returns a list containing all apis.
+      parameters: []
+      responses:
+        "200":
+          description: Default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
   /api/users:
     get:
       tags:
       - user
-      summary: get user list
+      summary: get users list
       description: Returns a list containing all users.
       operationId: getUsers
       parameters: []
@@ -534,7 +548,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Tags'
-  /api/tags/{tagname}:
+  /api/tags/{tagname}/articles:
     get:
       tags:
       - tag
@@ -574,6 +588,8 @@ components:
             $ref: '#/components/schemas/Article'
         email:
           type: string
+        url:
+          type: string
       example:
         password: ""
         id: 0
@@ -583,16 +599,19 @@ components:
             id: 5
             author-url: author-url
             content: content
+            url: url
             likeNum: 2
           - createTime: 2000-01-23T04:56:07.000+00:00
             id: 5
             author-url: author-url
             content: content
+            url: url
             likeNum: 2
           readNum: 1
           id: 6
           title: title
           content: content
+          url: url
           likeNum: 5
           tags:
           - name: name
@@ -602,21 +621,25 @@ components:
             id: 5
             author-url: author-url
             content: content
+            url: url
             likeNum: 2
           - createTime: 2000-01-23T04:56:07.000+00:00
             id: 5
             author-url: author-url
             content: content
+            url: url
             likeNum: 2
           readNum: 1
           id: 6
           title: title
           content: content
+          url: url
           likeNum: 5
           tags:
           - name: name
           - name: name
         email: email
+        url: url
     Article:
       type: object
       properties:
@@ -647,22 +670,27 @@ components:
             wrapped: true
           items:
             $ref: '#/components/schemas/Tag'
+        url:
+          type: string
       example:
         replies:
         - createTime: 2000-01-23T04:56:07.000+00:00
           id: 5
           author-url: author-url
           content: content
+          url: url
           likeNum: 2
         - createTime: 2000-01-23T04:56:07.000+00:00
           id: 5
           author-url: author-url
           content: content
+          url: url
           likeNum: 2
         readNum: 1
         id: 6
         title: title
         content: content
+        url: url
         likeNum: 5
         tags:
         - name: name
@@ -683,11 +711,14 @@ components:
           type: string
         author-url:
           type: string
+        url:
+          type: string
       example:
         createTime: 2000-01-23T04:56:07.000+00:00
         id: 5
         author-url: author-url
         content: content
+        url: url
         likeNum: 2
     Tag:
       type: object
@@ -728,6 +759,33 @@ components:
       items:
         $ref: '#/components/schemas/Tag'
       x-schema-name: Tags
+    Apis:
+      type: object
+      properties:
+        users_url:
+          type: string
+          default: /api/users
+        user_url:
+          type: string
+          default: /api/users/{userid}
+        articles_url:
+          type: string
+          default: /api/users/{userid}/articles
+        article_url:
+          type: string
+          default: /api/users/{userid}/articles/{articleid}
+        replies_url:
+          type: string
+          default: /api/users/{userid}/articles/{articleid}/replies
+        reply_url:
+          type: string
+          default: /api/users/{userid}/articles/{articleid}/replies/{replyid}
+        tags_url:
+          type: string
+          default: /api/users
+        tag_url:
+          type: string
+          default: /api/users/{userid}
   parameters:
     userid:
       name: userid
