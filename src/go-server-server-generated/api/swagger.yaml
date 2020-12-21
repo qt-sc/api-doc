@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: zhihu_caffe
   contact: {}
-  version: 0.1.2
+  version: 0.1.3
 servers:
 - url: /
 tags:
@@ -385,7 +385,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/Apis'
   /api/users:
     get:
       tags:
@@ -420,7 +420,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/User'
   /api/users/{userid}/articles:
     get:
       tags:
@@ -567,7 +567,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: '#/components/schemas/Articles'
 components:
   schemas:
     User:
@@ -786,6 +786,15 @@ components:
         tag_url:
           type: string
           default: /api/users/{userid}
+      example:
+        tags_url: /api/users
+        reply_url: /api/users/{userid}/articles/{articleid}/replies/{replyid}
+        replies_url: /api/users/{userid}/articles/{articleid}/replies
+        users_url: /api/users
+        user_url: /api/users/{userid}
+        tag_url: /api/users/{userid}
+        article_url: /api/users/{userid}/articles/{articleid}
+        articles_url: /api/users/{userid}/articles
   parameters:
     userid:
       name: userid
