@@ -1,6 +1,6 @@
 /**
- * Zhihu_Caffe
- * Zhihu_Caffe can craw data from ZhihuDaily and post article by user,  allowing users to reply the article and interact with other users.
+ * Zhihu_Caffee
+ * Zhihu_Caffee can craw data from ZhihuDaily and post article by user,  allowing users to reply the article and interact with other users.
  *
  * OpenAPI spec version: 0.1.4
  * 

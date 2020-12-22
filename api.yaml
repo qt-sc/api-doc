@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Zhihu_Caffe
+  title: Zhihu-Coffee
   version: 0.1.4
   contact: {}
   description: >-
-    Zhihu_Caffe can craw data from ZhihuDaily and post article by user, 
+    Zhihu-Coffee can craw data from ZhihuDaily and post article by user, 
     allowing users to reply the article and interact with other users.
 paths:
   /users/signup:

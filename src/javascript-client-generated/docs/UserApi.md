@@ -20,7 +20,7 @@ delete an existed user by userid
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.UserApi();
 let userid = 56; // Number | 
@@ -61,7 +61,7 @@ No authorization required
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.UserApi();
 let userid = 56; // Number | 
@@ -104,7 +104,7 @@ Returns a list containing all users.
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.UserApi();
 let opts = { 
@@ -148,7 +148,7 @@ update an existed user info by userid
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.UserApi();
 let user = new ZhihuCaffe.User(); // User | 
@@ -191,7 +191,7 @@ No authorization required
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.UserApi();
 let userid = 56; // Number | 
@@ -234,7 +234,7 @@ No authorization required
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.UserApi();
 let opts = { 
@@ -276,7 +276,7 @@ create a user in sign up page
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.UserApi();
 let user = new ZhihuCaffe.User(); // User | 
