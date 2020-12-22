@@ -8,15 +8,11 @@
  */
 package swagger
 
-type User struct {
+import (
+	"net/http"
+)
 
-	Id int64 `json:"id,omitempty"`
-
-	Password string `json:"password,omitempty"`
-
-	Articles []Article `json:"articles,omitempty"`
-
-	Email string `json:"email,omitempty"`
-
-	Url string `json:"url,omitempty"`
+func GetApis(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
 }
