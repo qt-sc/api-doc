@@ -117,3 +117,15 @@ GET：获取所有api
 ```
 /api
 ```
+
+## 安装指南
+前端：
+
+安装前端依赖：
+```
+npm install -g mirror-config-china --registry=http://registry.npm.taobao.org
+```
+启动前端项目：
+```
+npm run dev
+```
