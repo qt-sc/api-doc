@@ -13,6 +13,7 @@
 
 import ApiClient from "../ApiClient";
 import Articles from '../model/Articles';
+import Tag from '../model/Tag';
 import Tags from '../model/Tags';
 
 /**
@@ -33,6 +34,41 @@ export default class TagApi {
         this.apiClient = apiClient || ApiClient.instance;
     }
 
+    /**
+     * Callback function to receive the result of the createTag operation.
+     * @callback module:api/TagApi~createTagCallback
+     * @param {String} error Error message, if any.
+     * @param data This operation does not return a value.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * @param {module:api/TagApi~createTagCallback} callback The callback function, accepting three arguments: error, data, response
+     */
+    createTag(tag, callback) {
+      let postBody = null;
+
+      let pathParams = {
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+        'tag': tag
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+
+      return this.apiClient.callApi(
+        '/tags/new', 'POST',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
     /**
      * Callback function to receive the result of the getTags operation.
      * @callback module:api/TagApi~getTagsCallback

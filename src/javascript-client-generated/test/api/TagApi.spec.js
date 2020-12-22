@@ -47,6 +47,16 @@
   }
 
   describe('TagApi', function() {
+    describe('createTag', function() {
+      it('should call createTag successfully', function(done) {
+        //uncomment below and update the code to test createTag
+        //instance.createTag(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
     describe('getTags', function() {
       it('should call getTags successfully', function(done) {
         //uncomment below and update the code to test getTags

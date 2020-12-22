@@ -101,6 +101,7 @@ Class | Method | HTTP request | Description
 *ZhihuCaffe.ReplyApi* | [**getReplies**](docs/ReplyApi.md#getReplies) | **GET** /api/users/{userid}/articles/{articleid}/replies | get replies list in a specified article
 *ZhihuCaffe.ReplyApi* | [**getReply**](docs/ReplyApi.md#getReply) | **GET** /api/users/{userid}/articles/{articleid}/replies/{replyid} | get a reply with reply id in a specified article
 *ZhihuCaffe.ReplyApi* | [**likeReply**](docs/ReplyApi.md#likeReply) | **PUT** /users/{userid}/articles/{articleid}/replies/{replyid}/like | like a reply in a specified article
+*ZhihuCaffe.TagApi* | [**createTag**](docs/TagApi.md#createTag) | **POST** /tags/new | 
 *ZhihuCaffe.TagApi* | [**getTags**](docs/TagApi.md#getTags) | **GET** /api/tags | get tag list
 *ZhihuCaffe.TagApi* | [**searchArticlesByTag**](docs/TagApi.md#searchArticlesByTag) | **GET** /api/tags/{tagname}/articles | 
 *ZhihuCaffe.UserApi* | [**deleteUser**](docs/UserApi.md#deleteUser) | **DELETE** /users/{userid} | delete an existed user by userid

@@ -4,8 +4,50 @@ All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**createTag**](TagApi.md#createTag) | **POST** /tags/new | 
 [**getTags**](TagApi.md#getTags) | **GET** /api/tags | get tag list
 [**searchArticlesByTag**](TagApi.md#searchArticlesByTag) | **GET** /api/tags/{tagname}/articles | 
+
+<a name="createTag"></a>
+# **createTag**
+> createTag(tag)
+
+
+
+### Example
+```javascript
+import ZhihuCaffe from 'zhihu_caffe';
+
+let apiInstance = new ZhihuCaffe.TagApi();
+let tag = new ZhihuCaffe.Tag(); // Tag | 
+
+apiInstance.createTag(tag, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+});
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tag** | [**Tag**](.md)|  | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
 <a name="getTags"></a>
 # **getTags**

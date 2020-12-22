@@ -273,6 +273,22 @@ paths:
       responses:
         default:
           description: Default response
+  /tags/new:
+    post:
+      tags:
+      - tag
+      operationId: createTag
+      parameters:
+      - name: tag
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/Tag'
+      responses:
+        default:
+          description: Default response
   /api:
     get:
       summary: get apis list

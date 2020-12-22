@@ -132,6 +132,13 @@ var routes = Routes{
 	},
 
 	Route{
+		"CreateTag",
+		strings.ToUpper("Post"),
+		"/tags/new",
+		CreateTag,
+	},
+
+	Route{
 		"GetTags",
 		strings.ToUpper("Get"),
 		"/api/tags",
