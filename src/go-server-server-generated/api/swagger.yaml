@@ -1,6 +1,8 @@
 openapi: 3.0.0
 info:
-  title: zhihu_caffe
+  title: Zhihu_Caffe
+  description: Zhihu_Caffe can craw data from ZhihuDaily and post article by user,  allowing
+    users to reply the article and interact with other users.
   contact: {}
   version: 0.1.4
 servers:
@@ -19,15 +21,6 @@ tags:
   description: Tag is used to describe an article, and also be used to search articles.
 paths:
   /users/signup:
-    get:
-      tags:
-      - user
-      summary: return a page using to create new user
-      operationId: getSignupPage
-      parameters: []
-      responses:
-        default:
-          description: Default response
     post:
       tags:
       - user
@@ -84,22 +77,6 @@ paths:
         default:
           description: Default response
   /users/{userid}:
-    get:
-      tags:
-      - user
-      summary: get user profile by userid
-      operationId: getUserPage
-      parameters:
-      - name: userid
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      responses:
-        default:
-          description: Default response
     put:
       tags:
       - user
@@ -139,40 +116,7 @@ paths:
       responses:
         default:
           description: Default response
-  /users/{userid}/articles:
-    get:
-      tags:
-      - article
-      summary: get articles written by user with specified userid
-      operationId: getArticlesPage
-      parameters:
-      - name: userid
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      responses:
-        default:
-          description: Default response
   /users/{userid}/articles/new:
-    get:
-      tags:
-      - article
-      summary: return a page using to create new article
-      operationId: getCreateArticlePage
-      parameters:
-      - name: userid
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      responses:
-        default:
-          description: Default response
     post:
       tags:
       - article
@@ -197,29 +141,6 @@ paths:
         default:
           description: Default response
   /users/{userid}/articles/{articleid}:
-    get:
-      tags:
-      - article
-      summary: get article by aritcle id and user id
-      operationId: getArticlePage
-      parameters:
-      - name: userid
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      - name: articleid
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      responses:
-        default:
-          description: Default response
     put:
       tags:
       - article
@@ -352,26 +273,6 @@ paths:
       responses:
         default:
           description: Default response
-  /tags/{tagname}:
-    get:
-      tags:
-      - tag
-      operationId: getArticlesPageByTag
-      parameters:
-      - name: tagname
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: Default response
-          content:
-            application/json:
-              schema:
-                x-content-type: application/json
   /api:
     get:
       summary: get apis list
