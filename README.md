@@ -1,14 +1,11 @@
 # API-doc
 
-可以到 [swagger](https://editor.swagger.io/) 粘贴 yaml 文件查看 api。
+api 说明文档参见项目中的 [api-doc.html](api-doc.html) 文件。
 
-这里开发的 api 还不是稳定版本，有任何的需求和问题可以在 issue 和群里提出。
-
-- 数据结构基本稳定，除非继续增加需求
-- 路由信息也基本稳定，只需要完善 responses
-
-通过 api 文档可以自动生成后端程序的框架，**无需自己造轮子**。
+前端可以使用 [mocker server](https://kqz207d0-qt-sc.mock.coding.io) 进行测试。
 
 资源表示模型：
 
 ![rrm](image/resource-representation-model.png)
+
+提交的博客或项目小结可以放在 doc 文件夹中。
