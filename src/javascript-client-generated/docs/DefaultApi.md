@@ -16,7 +16,7 @@ Returns a list containing all apis.
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.DefaultApi();
 apiInstance.getApis((error, data, response) => {

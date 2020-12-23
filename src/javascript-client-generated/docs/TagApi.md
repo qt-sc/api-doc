@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.TagApi();
 let tag = new ZhihuCaffe.Tag(); // Tag | 
@@ -59,7 +59,7 @@ Returns a list containing all tags.
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.TagApi();
 let opts = { 
@@ -103,7 +103,7 @@ No authorization required
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.TagApi();
 let tagname = "tagname_example"; // String | 

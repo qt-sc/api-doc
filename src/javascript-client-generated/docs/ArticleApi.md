@@ -19,7 +19,7 @@ create an article by a user with specified userid
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ArticleApi();
 let userid = 56; // Number | 
@@ -62,7 +62,7 @@ delete an article by userid and article id
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ArticleApi();
 let userid = 56; // Number | 
@@ -105,7 +105,7 @@ get article by specified article id
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ArticleApi();
 let userid = 56; // Number | 
@@ -148,7 +148,7 @@ get articles list written by a user with specified user id
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ArticleApi();
 let userid = 56; // Number | 
@@ -194,7 +194,7 @@ like an article
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ArticleApi();
 let userid = 56; // Number | 
@@ -237,7 +237,7 @@ update an existed article info by userid and article id
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ArticleApi();
 let userid = 56; // Number | 

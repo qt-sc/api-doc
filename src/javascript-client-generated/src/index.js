@@ -1,6 +1,6 @@
 /**
- * Zhihu_Caffe
- * Zhihu_Caffe can craw data from ZhihuDaily and post article by user,  allowing users to reply the article and interact with other users.
+ * Zhihu_Caffee
+ * Zhihu_Caffee can craw data from ZhihuDaily and post article by user,  allowing users to reply the article and interact with other users.
  *
  * OpenAPI spec version: 0.1.4
  * 
@@ -28,7 +28,7 @@ import TagApi from './api/TagApi';
 import UserApi from './api/UserApi';
 
 /**
-* Zhihu_Caffe_can_craw_data_from_ZhihuDaily_and_post_article_by_user__allowing_users_to_reply_the_article_and_interact_with_other_users_.<br>
+* Zhihu_Caffee_can_craw_data_from_ZhihuDaily_and_post_article_by_user__allowing_users_to_reply_the_article_and_interact_with_other_users_.<br>
 * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
 * <p>
 * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:

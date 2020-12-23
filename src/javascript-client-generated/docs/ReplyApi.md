@@ -17,7 +17,7 @@ create an reply in a specified article
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ReplyApi();
 let userid = 56; // Number | 
@@ -62,7 +62,7 @@ get replies list in a specified article
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ReplyApi();
 let userid = 56; // Number | 
@@ -110,7 +110,7 @@ get a reply with reply id in a specified article
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ReplyApi();
 let userid = 56; // Number | 
@@ -155,7 +155,7 @@ like a reply in a specified article
 
 ### Example
 ```javascript
-import ZhihuCaffe from 'zhihu_caffe';
+import ZhihuCaffe from 'Zhihu_Caffee';
 
 let apiInstance = new ZhihuCaffe.ReplyApi();
 let userid = 56; // Number | 
