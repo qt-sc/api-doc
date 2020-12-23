@@ -42,8 +42,7 @@
 
 ![rrm](image/resource-representation-model.png)
 
-<<<<<<< HEAD
-提交的博客或项目小结可以放在 doc 文件夹中。
+
 
 ## 项目介绍
 本项目实现的是一个博客系统。
@@ -193,4 +192,3 @@ API 具体设计如下：
 ![api](./image/api1.png)
 
 ![api](./image/api2.png)
->>>>>>> 
